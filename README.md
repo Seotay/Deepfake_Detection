@@ -78,7 +78,7 @@ Because `submission/` is mounted, it will be created/updated on the host at: `su
 ## Download Dataset & Weights (Google Drive)
 Download the required datasets and pretrained weights from the Google Drive link below:
 
-https://drive.google.com/file/d/1glFBFe3RL0ATxY4ve558ai8ZfWDxLxN2/view
+https://drive.google.com/file/d/1mjsJ5UZvKQIcZPbLJCVbj0GdfIEevm88/view
 
 After downloading, extract and place the highlighted folders and files in the following directory structure:
 
