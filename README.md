@@ -80,54 +80,52 @@ Download the required datasets and pretrained weights from the Google Drive link
 
 https://drive.google.com/file/d/1glFBFe3RL0ATxY4ve558ai8ZfWDxLxN2/view
 
-After downloading, extract and place the highlighted folders & files (`  `) in the following directory structure:
+After downloading, extract and place the highlighted folders and files in the following directory structure:
 
 
-```text
-
-project/
-    ├── config/
-    │   └── config.yaml  # Training & Inference configuration
-    │
-    ├── `model/`
-    │   ├── `effort_clip_L14_trainOn_FaceForensic.pth`  # pre-trained-EffortDetector
-    │   ├── `model.pt`                  # finetuned-EffortDetector 
-    │   ├── `yolo_model.pt`             # YOLO face detector weights
-    │   └── `clip-vit-large-patch14`/   # CLIP pretrained backbone
-    │       ├── `config.json`
-    │       ├── `model.safetensors`
-    │       └── `preprocessor_config.json`
-    │       └── `...`
-    │
-    ├── env/
-    │   ├── Dockerfile              
-    │   ├── requirements.txt
-    │   └── environment.yml
-    ├── src/
-    │   ├── models.py        # EffortDetector definition
-    │   ├── dataset.py             
-    │   └── utils.py               
-    │
-    ├── `train_data/`              
-    │   ├── `csv/`
-    │   ├── `Deepfakes/`
-    │   ├── `Face2Face/`
-    │   ├── `FaceShifter/`
-    │   ├── `FaceSwap/`
-    │   ├── `NeuralTextures/`
-    │   ├── `original/`
-    │   └── `preprocessing/`  # Preprocessed data(folders/files) for training
-    │
-    ├── `test_data/`          # Input data for inference
-    │   ├── `TEST_000.mp4`
-    │   ├── `TEST_001.jpg`
-    │   ├── `...`
-    │
-    ├── submission/           # Output directory (generated)
-    │   └── baseline_submission.csv
-    │   └── submission_finetuned.csv
-    │
-    ├── train_eval.py         # Training / evaluation script
-    ├── inference.py          # Main inference entry point
-    └── README.md                     
 ```
+  project/
+      ├── config/
+      │   └── config.yaml  # Training & Inference configuration
+      │
+      ├── model/
+      │   ├── effort_clip_L14_trainOn_FaceForensic.pth  # pre-trained-EffortDetector
+      │   ├── model.pt                  # finetuned-EffortDetector 
+      │   ├── yolo_model.pt             # YOLO face detector weights
+      │   └── clip-vit-large-patch14/   # CLIP pretrained backbone
+      │       ├── config.json
+      │       ├── model.safetensors
+      │       └── preprocessor_config.json
+      │       └── ...
+      │
+      ├── env/
+      │   ├── Dockerfile              
+      │   ├── requirements.txt
+      │   └── environment.yml
+      ├── src/
+      │   ├── models.py        # EffortDetector definition
+      │   ├── dataset.py             
+      │   └── utils.py               
+      │
+      ├── train_data/             
+      │   ├── csv/
+      │   ├── Deepfakes/
+      │   ├── Face2Face/
+      │   ├── FaceShifter/
+      │   ├── FaceSwap/
+      │   ├── NeuralTextures/
+      │   ├── original/
+      │   └── preprocessing/  # Preprocessed data(folders/files) for training
+      │
+      ├── test_data/          # Input data for inference
+      │   ├── TEST_000.mp4
+      │   ├── TEST_001.jpg
+      │   ├── ...
+      │
+      ├── submission/           # Output directory (generated)
+      │   └── baseline_submission.csv
+      │   └── submission_finetuned.csv
+      │
+      ├── train_eval.py         # Training / evaluation script
+      ├── inference.py          # Main inference entry point
+      └── README.md                     
