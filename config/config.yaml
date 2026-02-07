@@ -1,0 +1,55 @@
+# model setting
+model_name: effort   # model name
+backbone_name: vit  # backbone name
+
+# CLIP local path (for offline)
+clip_pretrained_path: ./model/clip-vit-large-patch14
+
+#backbone setting
+backbone_config:
+  mode: original
+  num_classes: 2
+  inc: 3
+  dropout: false
+
+# dataset
+train_batchSize: 8   # training batch size
+val_batchSize: 8   # training batch size
+
+workers: 2   # number of data loading workers
+frame_num:
+  train: 4
+  test: 8
+resolution: 224   # resolution of output image to network
+val_ratio: 0.15   # ratio of validation set from training data
+
+
+# mean and std for normalization
+mean: [0.48145466, 0.4578275, 0.40821073]
+std: [0.26862954, 0.26130258, 0.27577711]
+
+# optimizer config
+optimizer:
+  adam:
+    lr: 0.0002  # learning rate
+    weight_decay: 0.0002  # weight decay for regularization
+
+# yolo setting
+yolo_config: 
+  image_size: 640
+  conf_thres: 0.8
+  iou_thres: 0.5
+  min_face_ratio: 0.00001
+  margin_ratio: 0.30
+  use_fp16: true
+
+
+# training config
+lr_scheduler: null   # learning rate scheduler
+nEpochs: 10   # number of epochs to train for
+use_fp16: true
+
+# early stoppig
+patience: 5
+delta: 0.0
+
