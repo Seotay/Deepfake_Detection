@@ -1,60 +1,50 @@
-# Deepfake Detection Inference (Effort)
-
+# Deepfake Detection
 
 ## Purpose
-This repository performs **offline inference** for deepfake detection and produces a submission CSV.
-
-**Inference pipeline**
-1) Load files from `./test_data` (images/videos)  
-2) Detect/crop face using **YOLO** (`./model/yolo_model.pt`)  
-   - Fallback: best-candidate crop → full-frame padded fallback  
-3) Resize to `224×224` and apply **CLIP normalization** (mean/std from config)  
-4) Predict with **EffortDetector** loaded from `./model/model.pt`  
-5) Save predictions to `./submission/submission_finetuned.csv`
-
----
+This repository performs **inference** for deepfake detection and produces a submission output CSV file.
 
 ## Model Summary
 - **Detector**: `EffortDetector` (single model inference)
 - **Backbone**: CLIP ViT-L/14 (`clip-vit-large-patch14`)
 - **Face detector**: Ultralytics YOLO
 - **Final weights (used at inference)**: `./model/model.pt`
+- **Pre-trained weights (used at training & evaluation)**: `./model/effort_clip_L14_trainOn_FaceForensic.pth`
 - **YOLO weights**: `./model/yolo_model.pt`
 
 ---
 
-## Offline Execution
-Inference must run with **no internet**.
 
-### 1) Run container with network disabled
-Use `--network none` at runtime.
+**Inference pipeline**
+  1) Load files from `./test_data` (images/videos)  
+  2) Detect/crop face using **YOLO** (`./model/yolo_model.pt`)
+    - Fallback: best-candidate crop → full-frame padded fallback
+  3) Resize to `224×224` and apply **CLIP normalization** (mean/std from config)  
+  4) Predict with **EffortDetector** loaded from `./model/model.pt`
+  5) Save results to `./submission/submission_finetuned.csv`
 
-### 2) CLIP must be loaded locally (no HuggingFace download)
-Set in `config/config.yaml`:
-```yaml
-clip_pretrained_path: ./model/clip-vit-large-patch14
-```
-The local folder `./model/clip-vit-large-patch14` must contain HuggingFace save_pretrained() outputs such as:
-
-config.json
-
-model.safetensors (or pytorch_model.bin)
-
-preprocessor_config.json
-
-If clip_pretrained_path is not a local directory, inference will fail offline due to Hub download attempts.
 
 ---
 
-## How to Run
 
-### Step 1) Build Docker image
+
+## How to Inference
+
+### Step 1. Build Docker image
 Run at project root: `docker build -f env\Dockerfile -t submit_test:latest .`
 
-### Step 2) Prepare host output directory
-`mkdir submission -Force`
+### Step 2. Ensure finetuned Effort model weights and test data are prepared
+Before running inference, make sure that the following files and directories exist:
 
-### Step 3) Run inference (offline, GPU enabled)
+  - Finetuned Effort model weights:
+    - `./model/model.pt`
+  - YOLO face detector weights:
+    - `./model/yolo_model.pt`
+  - CLIP pretrained backbone (local directory):
+    - `./model/clip-vit-large-patch14/`
+  - Test data directory:
+    - `./test_data/` (images and/or videos)
+
+### Step 3. Run inference (offline, GPU enabled)
 ```powershell
 docker run --rm --network none --gpus all -it `
   -v "${PWD}\model:/workspace/model" `
@@ -82,5 +72,62 @@ The output file is written inside the container to: `./submission/submission_fin
 
 Because `submission/` is mounted, it will be created/updated on the host at: `submission\submission_finetuned.csv`
 
-## Download Dataset & Weights at Google Drive !!
+---
 
+
+## Download Dataset & Weights (Google Drive)
+Download the required datasets and pretrained weights from the Google Drive link below:
+
+https://drive.google.com/file/d/1glFBFe3RL0ATxY4ve558ai8ZfWDxLxN2/view
+
+After downloading, extract and place the highlighted folders & files (`  `) in the following directory structure:
+
+
+```text
+
+project/
+    ├── config/
+    │   └── config.yaml  # Training & Inference configuration
+    │
+    ├── `model/`
+    │   ├── `effort_clip_L14_trainOn_FaceForensic.pth`  # pre-trained-EffortDetector
+    │   ├── `model.pt`                  # finetuned-EffortDetector 
+    │   ├── `yolo_model.pt`             # YOLO face detector weights
+    │   └── `clip-vit-large-patch14`/   # CLIP pretrained backbone
+    │       ├── `config.json`
+    │       ├── `model.safetensors`
+    │       └── `preprocessor_config.json`
+    │       └── `...`
+    │
+    ├── env/
+    │   ├── Dockerfile              
+    │   ├── requirements.txt
+    │   └── environment.yml
+    ├── src/
+    │   ├── models.py        # EffortDetector definition
+    │   ├── dataset.py             
+    │   └── utils.py               
+    │
+    ├── `train_data/`              
+    │   ├── `csv/`
+    │   ├── `Deepfakes/`
+    │   ├── `Face2Face/`
+    │   ├── `FaceShifter/`
+    │   ├── `FaceSwap/`
+    │   ├── `NeuralTextures/`
+    │   ├── `original/`
+    │   └── `preprocessing/`  # Preprocessed data(folders/files) for training
+    │
+    ├── `test_data/`          # Input data for inference
+    │   ├── `TEST_000.mp4`
+    │   ├── `TEST_001.jpg`
+    │   ├── `...`
+    │
+    ├── submission/           # Output directory (generated)
+    │   └── baseline_submission.csv
+    │   └── submission_finetuned.csv
+    │
+    ├── train_eval.py         # Training / evaluation script
+    ├── inference.py          # Main inference entry point
+    └── README.md                     
+```
