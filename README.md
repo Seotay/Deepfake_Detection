@@ -1,7 +1,10 @@
 # Effort Model for Generalizable Deepfake Detection with Orthogonal Subspace Decomposition
 
-## Purpose
-This repository performs **inference** for deepfake detection and produces a submission output CSV file.
+## Key Contributions
+- Built a **generalizable deepfake detection pipeline** by combining YOLO-based face cropping with a CLIP ViT-L/14-based EffortDetector.
+- Applied **SVD-based residual fine-tuning** to preserve pre-trained representations while adapting the model to deepfake-specific characteristics.
+- Introduced **orthogonality constraints** between principal and residual components to reduce interference with pre-trained knowledge and improve robustness to unseen manipulation types.
+- Designed an **end-to-end inference pipeline** capable of processing both image and video inputs, including face detection (cropping), preprocessing, and prediction.
 
 ## Model Summary
 - **Detector**: `EffortDetector` (single model inference)
