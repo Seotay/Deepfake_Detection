@@ -14,7 +14,7 @@ This repository performs **inference** for deepfake detection and produces a sub
 <p align="center">
   <img src="./figures/Effort_model.png" width="650"/>
   <br/>
-  <em> Overall workflow of the CNN framework for wafer defect classification, including preprocessing, feature extraction, classification, and interpretability analysis</em>
+  <em> Architecture of the EffortDetector framework with CLIP ViT-L/14 and SVD-based residual component learning for deepfake detection.</em>
 </p>
 
 ---
@@ -84,9 +84,9 @@ Because `submission/` is mounted, it will be created/updated on the host at: `su
 ## Download Dataset & Weights (Google Drive)
 
 <p align="center">
-  <img src="./figures/FaceForensics++.png" width="650"/>
+  <img src="./figures/FaceForensics++.png" width="550"/>
   <br/>
-  <em> Overall workflow of the CNN framework for wafer defect classification, including preprocessing, feature extraction, classification, and interpretability analysis</em>
+  <em> FaceForensics++ (F++) Dataset</em>
 </p>
 
 Download the required datasets and pretrained weights from the Google Drive link below:
