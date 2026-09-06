@@ -11,6 +11,12 @@ This repository performs **inference** for deepfake detection and produces a sub
 - **Pre-trained weights (used at training & evaluation)**: `./model/effort_clip_L14_trainOn_FaceForensic.pth`
 - **YOLO weights**: `./model/yolo_model.pt`
 
+<p align="center">
+  <img src="./figures/Effort_model.png" width="650"/>
+  <br/>
+  <em> Overall workflow of the CNN framework for wafer defect classification, including preprocessing, feature extraction, classification, and interpretability analysis</em>
+</p>
+
 ---
 
 
@@ -76,6 +82,13 @@ Because `submission/` is mounted, it will be created/updated on the host at: `su
 
 
 ## Download Dataset & Weights (Google Drive)
+
+<p align="center">
+  <img src="./figures/FaceForensics++.png" width="650"/>
+  <br/>
+  <em> Overall workflow of the CNN framework for wafer defect classification, including preprocessing, feature extraction, classification, and interpretability analysis</em>
+</p>
+
 Download the required datasets and pretrained weights from the Google Drive link below:
 
 https://drive.google.com/file/d/1mjsJ5UZvKQIcZPbLJCVbj0GdfIEevm88/view
