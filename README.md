@@ -1,4 +1,4 @@
-# Deepfake Detection
+# Effort Model for Generalizable Deepfake Detection with Orthogonal Subspace Decomposition
 
 ## Purpose
 This repository performs **inference** for deepfake detection and produces a submission output CSV file.
